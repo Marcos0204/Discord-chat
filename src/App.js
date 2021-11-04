@@ -1,17 +1,24 @@
-import React from "react";
-//Importamos la aplicación/credenciales
+import React, { useState } from "react";
 import firebaseApp from "./firebase/credenciales";
-
-// Conforme se necesite, importar los demás servicios y funciones. Por ejemplo:
+import Login from "./views/Login";
+import Sidebar from "./views/Sidebar";
+import ChatScreen from "./views/ChatScreen";
 
 /* import { getAuth, onAuthStateChanged } from "firebase/auth";
 const auth = getAuth(firebaseApp); */
 
 function App() {
+  const [ userGlober, setUserGlobal ] = useState(null)
   return (
     <div>
-      <p style={{ color: "black" }}>Hola</p>
-      <button> ¡Buenas!</button>
+      {userGlober ? (
+        <>
+          <Sidebar/>
+          <ChatScreen/>
+        </>
+      ) : (
+        <Login/>
+      )}
     </div>
   );
 }
