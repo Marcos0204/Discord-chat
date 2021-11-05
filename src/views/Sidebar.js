@@ -10,6 +10,7 @@ import {
   setDoc,
   getDocs,
 } from "firebase/firestore";
+import SidebarChannel from '../components/SidebarChannel';
 
 const fireStore = getFirestore(firebaseApp);
 
@@ -41,6 +42,7 @@ const Sidebar = ({userGlober}) => {
           name: nameChannel,
         })
       }
+      getChannels();
       
     }
     return (
@@ -61,15 +63,9 @@ const Sidebar = ({userGlober}) => {
             </div>
     
             <div className="sidebar__channelsList">
-              {/* {listaCanales
-                ? listaCanales.map((canal) => {
-                    return (
-                      <div onClick={() => setCanalActivo(canal.nombre)}>
-                        <CanalEnSidebar nombre={canal.nombre} id={canal.id} />
-                      </div>
-                    );
-                  })
-                : null} */}
+              {listChannels ? listChannels.map(channel => (
+                <SidebarChannel name={channel.name} id={channel.id}/>
+              )) : null}
             </div>
           </div>
     
