@@ -21,7 +21,7 @@ function App() {
     <div>
       {userGlober ? (
         <>
-          <Sidebar/>
+          <Sidebar userGlober={userGlober}/>
           <ChatScreen/>
         </>
       ) : (
