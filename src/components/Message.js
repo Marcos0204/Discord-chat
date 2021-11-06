@@ -5,7 +5,7 @@ import { Avatar } from "@material-ui/core";
 function Message({ message }) {
   return (
     <div className="message">
-      <Avatar src={mensajeFirebase.foto} />
+      <Avatar src={message.foto} />
 
       <div className="message__info">
         <h4>
