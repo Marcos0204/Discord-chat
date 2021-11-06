@@ -19,6 +19,7 @@ const firestore = getFirestore(firebaseApp);
 const ChatScreen = ({channelActive, user, photo}) => {
     const [ messages, setMessages ] = useState('');
     const [ listMessages, setListMessages] = useState([])
+    const anchor = useRef();
 
     const sendMessage= (e) => {
         e.preventDefault();
@@ -31,6 +32,7 @@ const ChatScreen = ({channelActive, user, photo}) => {
         });
         getListMessages()
         setMessages('')
+        anchor.current.scrollIntoView({ behavior: "smooth" });
     }
 
     const getListMessages = async () =>{
@@ -42,6 +44,7 @@ const ChatScreen = ({channelActive, user, photo}) => {
                 list.push(item.data())
             });
             setListMessages(list)
+            //anchor.current.scrollIntoView({ behavior: "smooth" });
     
     }
 
@@ -56,6 +59,7 @@ const ChatScreen = ({channelActive, user, photo}) => {
                 listMessages.map((message) => {
                     return <Message message={message} key={message.id}/>;
                     }) }
+                <div ref={anchor} style={{ marginBottom: "75px" }}></div>
             </div>
             <div className='chat__input'>
                 <AddCircle fontSize="large" />
