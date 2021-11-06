@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { AddCircle, CreditCard, Gif, EmojiEmotions } from "@material-ui/icons";
 
-const ChatScreen = () => {
+import HeaderChat from '../components/HeaderChat';
+const ChatScreen = ({channelActive}) => {
     const [ messages, setMessages ] = useState('')
     return (
         <div className='chat'>
-            <div>Encabezado</div>
+            <HeaderChat channelActive={channelActive} />
             <div className='chat__messages'>
                 {/* {mostrar mensajes} */}
             </div>
@@ -20,7 +21,7 @@ const ChatScreen = () => {
                     //disabled={canalActivo ? false : true}
                     value={messages}
                    onChange={(e) => setMessages(e.target.value)}
-                    //placeholder={`Enviar mensaje a # ${canalActivo || ""}`}
+                    placeholder={channelActive && `Enviar mensaje a # ${channelActive || ""}`}
                 />
                 <button
                     //disabled={canalActivo ? false : true}
