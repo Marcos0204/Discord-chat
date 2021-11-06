@@ -10,7 +10,7 @@ const auth = getAuth(firebaseApp);
 function App() {
   const [ userGlober, setUserGlobal ] = useState(null);
   const [ channelActive, setChannelActive ] = useState('');
-  
+
   onAuthStateChanged(auth, (userAuth) =>{
     if(userAuth){
       setUserGlobal(userAuth)
@@ -24,7 +24,7 @@ function App() {
       {userGlober ? (
         <>
           <Sidebar userGlober={userGlober} setChannelActive={setChannelActive}/>
-          <ChatScreen channelActive={channelActive}/>
+          <ChatScreen channelActive={channelActive} user={userGlober.displayName} photo={userGlober.photoURL}/>
         </>
       ) : (
         <Login/>
