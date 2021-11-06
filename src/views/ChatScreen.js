@@ -11,10 +11,14 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
+import Message from '../components/Message';
+
 const firestore = getFirestore(firebaseApp);
 
+
 const ChatScreen = ({channelActive, user, photo}) => {
-    const [ messages, setMessages ] = useState('')
+    const [ messages, setMessages ] = useState('');
+    const [ listMessages, setListMessages] = useState([])
 
     const sendMessage= (e) => {
         e.preventDefault();
@@ -25,8 +29,24 @@ const ChatScreen = ({channelActive, user, photo}) => {
             messages,
             id: new Date().getTime()
         });
+        getListMessages()
         setMessages('')
     }
+
+    const getListMessages = async () =>{
+        const list = [];
+        const collectionRef = collection(firestore, `channels/${channelActive}/messages` )
+        const res= await  getDocs(collectionRef)
+            res.forEach(item => {
+                list.push(item.data())
+            });
+            setListMessages(list)
+    
+    }
+
+    useEffect(() => {
+        channelActive && getListMessages()
+    }, [])
     return (
         <div className='chat'>
             <HeaderChat channelActive={channelActive} />
