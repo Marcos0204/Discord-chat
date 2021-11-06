@@ -38,6 +38,7 @@ const ChatScreen = ({channelActive, user, photo}) => {
         const collectionRef = collection(firestore, `channels/${channelActive}/messages` )
         const res= await  getDocs(collectionRef)
             res.forEach(item => {
+               
                 list.push(item.data())
             });
             setListMessages(list)
@@ -46,12 +47,15 @@ const ChatScreen = ({channelActive, user, photo}) => {
 
     useEffect(() => {
         channelActive && getListMessages()
-    }, [])
+    }, [channelActive])
     return (
         <div className='chat'>
             <HeaderChat channelActive={channelActive} />
             <div className='chat__messages'>
-                {/* {mostrar mensajes} */}
+            {listMessages &&
+                listMessages.map((message) => {
+                    return <Message message={message} key={message.id}/>;
+                    }) }
             </div>
             <div className='chat__input'>
                 <AddCircle fontSize="large" />
