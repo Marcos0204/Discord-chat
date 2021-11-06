@@ -8,7 +8,9 @@ import ChatScreen from "./views/ChatScreen";
 const auth = getAuth(firebaseApp); 
 
 function App() {
-  const [ userGlober, setUserGlobal ] = useState(null)
+  const [ userGlober, setUserGlobal ] = useState(null);
+  const [ channelActive, setChannelActive ] = useState('');
+
   onAuthStateChanged(auth, (userAuth) =>{
     if(userAuth){
       setUserGlobal(userAuth)
@@ -18,11 +20,11 @@ function App() {
     }
   })
   return (
-    <div>
+    <div className='app'>
       {userGlober ? (
         <>
-          <Sidebar userGlober={userGlober}/>
-          <ChatScreen/>
+          <Sidebar userGlober={userGlober} setChannelActive={setChannelActive}/>
+          <ChatScreen channelActive={channelActive} user={userGlober.displayName} photo={userGlober.photoURL}/>
         </>
       ) : (
         <Login/>

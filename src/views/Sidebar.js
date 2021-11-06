@@ -14,7 +14,7 @@ import SidebarChannel from '../components/SidebarChannel';
 
 const fireStore = getFirestore(firebaseApp);
 
-const Sidebar = ({userGlober}) => {
+const Sidebar = ({userGlober, setChannelActive}) => {
 
   const [listChannels, setListsChannels] = useState([])
 
@@ -64,7 +64,9 @@ const Sidebar = ({userGlober}) => {
     
             <div className="sidebar__channelsList">
               {listChannels ? listChannels.map(channel => (
-                <SidebarChannel name={channel.name} id={channel.id}/>
+                <div onClick={() =>setChannelActive(channel.name)} key={channel.id}>
+                  <SidebarChannel name={channel.name} id={channel.id}/>
+                </div>
               )) : null}
             </div>
           </div>
